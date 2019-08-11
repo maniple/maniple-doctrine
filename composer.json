@@ -26,6 +26,9 @@
         ],
         "psr-0": {
             "ManipleDoctrine_": "library/"
+        },
+        "psr-4": {
+            "ManipleDoctrine\\": "library/ManipleDoctrine/"
         }
     },
     "minimum-stability": "dev",
