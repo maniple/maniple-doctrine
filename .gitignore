@@ -1,0 +1,14 @@
+# Composer files
+composer.lock
+composer.phar
+/vendor/
+
+# Editor cache files
+*.swp
+*.swo
+*~
+.idea
+
+# System files
+.DS_Store
+Thumbs.db
