@@ -2,15 +2,19 @@
 
 namespace ManipleDoctrine\Service;
 
+use ManipleDoctrine\Extensions\TablePrefix;
+use ManipleDoctrine\Types\BoolintType;
+use ManipleDoctrine\Types\EpochType;
+
 abstract class EntityManagerFactory
 {
     public static function factory(\Maniple_Di_Container $container)
     {
-        /** @var \ManipleCore\Doctrine\Config $config */
+        /** @var \ManipleDoctrine\Config $config */
         $config = $container->getResource('EntityManager.config');
 
         /** @var $db \Zefram_Db */
-        $db = $container->getResource('ZeframDb');
+        $db = $container->getResource('Zefram_Db');
 
         $evm = new \Doctrine\Common\EventManager();
         $conn = \Doctrine\DBAL\DriverManager::getConnection(array('pdo' => $db->getAdapter()->getConnection()), null, $evm);
@@ -29,12 +33,12 @@ abstract class EntityManagerFactory
         $metadataConfig->setAutoGenerateProxyClasses(true);
 
         // setup table prefix
-        $tablePrefix = new \ManipleCore\Doctrine\Extensions\TablePrefix($db->getTablePrefix());
+        $tablePrefix = new TablePrefix($db->getTablePrefix());
         $evm->addEventListener(\Doctrine\ORM\Events::loadClassMetadata, $tablePrefix);
 
         // setup custom types
-        \Doctrine\DBAL\Types\Type::addType('epoch', 'ManipleCore\Doctrine\Types\EpochType');
-        \Doctrine\DBAL\Types\Type::addType('boolint', 'ManipleCore\Doctrine\Types\BoolintType');
+        \Doctrine\DBAL\Types\Type::addType('epoch', EpochType::className);
+        \Doctrine\DBAL\Types\Type::addType('boolint', BoolintType::className);
 
         foreach ($config->getTypes() as $name => $class) {
             \Doctrine\DBAL\Types\Type::addType($name, $class);

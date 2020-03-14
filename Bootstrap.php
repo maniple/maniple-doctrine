@@ -9,7 +9,7 @@ class ManipleDoctrine_Bootstrap extends Maniple_Application_Module_Bootstrap
 
     public function getResourcesConfig()
     {
-        return require dirname(__FILE__) . '/configs/resources.config.php';
+        return require __DIR__ . '/configs/resources.config.php';
     }
 
     /**
@@ -20,7 +20,7 @@ class ManipleDoctrine_Bootstrap extends Maniple_Application_Module_Bootstrap
         Zend_Loader_AutoloaderFactory::factory(array(
             'Zend_Loader_StandardAutoloader' => array(
                 'prefixes' => array(
-                    'ManipleDoctrine_' => dirname(__FILE__) . '/library/ManipleDoctrine/',
+                    'ManipleDoctrine_' => __DIR__ . '/library/ManipleDoctrine/',
                 ),
             ),
         ));

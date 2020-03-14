@@ -10,6 +10,8 @@ use Doctrine\DBAL\Platforms\AbstractPlatform;
  */
 class BoolintType extends Type
 {
+    const className = __CLASS__;
+
     public function getName()
     {
         return 'boolint';

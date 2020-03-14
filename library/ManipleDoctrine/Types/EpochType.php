@@ -7,6 +7,8 @@ use Doctrine\DBAL\Platforms\AbstractPlatform;
 
 class EpochType extends Type
 {
+    const className = __CLASS__;
+
     const EPOCH = 'epoch';
 
     public function getSQLDeclaration(array $fieldDeclaration, AbstractPlatform $platform)
